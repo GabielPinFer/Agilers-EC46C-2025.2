@@ -9,10 +9,10 @@ Desenvolvimento Ágil
 ### Período
 2025.2
 ### Integrantes
-Ellian Maciel Moreira Ribeiro (github account)[]
-Gabriel Pinheiro Ferrari (github account)[https://github.com/GabielPinFer]
-Mario Issamu Barbuglio Morita (github account)[]
-Pedro Henrique da Costa Silva (github account)[]
+- Ellian Maciel Moreira Ribeiro (github account)[]
+- Gabriel Pinheiro Ferrari (github account)[https://github.com/GabielPinFer]
+- Mario Issamu Barbuglio Morita (github account)[]
+- Pedro Henrique da Costa Silva (github account)[]
 
 ## Objetivo
 O principal objetivo do projeto aqui desenvolvido é proposrcionar o código frontend para um sistema de aulas online. Nesse sentido, as páginas e suas funcionalidades são apresentadas separadamente, com suas documentações.
