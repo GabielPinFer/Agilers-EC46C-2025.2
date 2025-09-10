@@ -12,7 +12,7 @@ Desenvolvimento Ágil
 - Ellian Maciel Moreira Ribeiro (github account)[]
 - Gabriel Pinheiro Ferrari (github account)[https://github.com/GabielPinFer]
 - Mario Issamu Barbuglio Morita (github account)[]
-- Pedro Henrique da Costa Silva (github account)[]
+- Pedro Henrique da Costa Silva (github account)[https://github.com/Pedrh316]
 
 ## Objetivo
 O principal objetivo do projeto aqui desenvolvido é proposrcionar o código frontend para um sistema de aulas online. Nesse sentido, as páginas e suas funcionalidades são apresentadas separadamente, com suas documentações.
