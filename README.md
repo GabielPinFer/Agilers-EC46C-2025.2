@@ -9,9 +9,9 @@ Desenvolvimento Ágil
 ### Período
 2025.2
 ### Integrantes
-- Ellian Maciel Moreira Ribeiro (github account)[]
+- Ellian Maciel Moreira Ribeiro (github account)[https://github.com/Ellian-Ribeiro]
 - Gabriel Pinheiro Ferrari (github account)[https://github.com/GabielPinFer]
-- Mario Issamu Barbuglio Morita (github account)[]
+- Mario Issamu Barbuglio Morita (github account)[https://github.com/Issamu03]
 - Pedro Henrique da Costa Silva (github account)[https://github.com/Pedrh316]
 
 ## Objetivo
