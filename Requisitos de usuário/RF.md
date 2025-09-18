@@ -12,14 +12,16 @@ A tabela abaixo apresenta os requisitos funcionais do projeto de páginas desenv
 | RF06 | O Aluno deve ter acesso as disciplinas cadastras | Alta | - |
 | RF07 | O Professor deve lançar as notas | Alta | - |
 | RF08 | O Professor deve lançar as frequências | Alta | RF02 |
-| RF09 | O Professor pode alterar o material para ministrar as aulas | Média | - |
+| RF09 | O  Professor pode adicionar o material na disciplina ministrada | Média | - |
 | RF10 | O Professor pode vizualizar os participantes da disciplina | Média | RF04 |
 | RF11 | O Professor pode mandar mensagem para o Aluno pelo Sistema | Média | RF05 |
+| RF12 | O Professor pode alterar o material da aula ministrada | Média | RF09 |
 
 
 <div stle="text-align: center">
 <p> Tabela 1: Requisitos Funcionais</p>
 </div>
+
 
 
 
