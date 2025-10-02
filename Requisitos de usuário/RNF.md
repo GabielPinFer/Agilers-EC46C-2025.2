@@ -18,4 +18,11 @@ A tabela abaixo apresenta os requisitos não funcionais do projeto de páginas d
 <p>Tabela 2: Requisitos Não Funcionais</p>
 </div>
 
+# 2. Requisitos Não Funcionais - Externos
+|  ID  |     Requisitos NF     | Categoria/Tipo | Prioridade | Requisitos Relacionados |
+| :--: | :-------------------: | :------------: | :--------: | :---------------------: |
+| RNF10 | O sistema deve simular a persistência de dados utilizando o localStorage do navegador, permitindo que as informações não se percam ao mudar de pagina. | Externo/Interopelabilidade | Média | - |
+| RNF12 | O sistema deve oferecer controle total sobre suas notificações, permitindo que o usuario escolha quais tipos de alertas deseja receber| Externo/Ético | Média | - |
+| RNF13 | O sistema deve estar em conformidade com a Lei Geral de Proteção de Dados (LGPD), garantindo a privacidade e o tratamento adequado dos dados dos usuários.| Externo/Legais/Privacidade | Alta | - |
+
 
