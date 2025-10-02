@@ -4,10 +4,8 @@ A Tabela 3 abaixo refere-se às Histórias de Usuários sobre o sistema apresent
 
 | ID   | História de Usuário | Critérios de Aceitação | Prioridade | RF/RNF Relacionados | Story Points |
 | :--: | :-----------------: | :--------------------: | :--------: | :-----------------: | :----------: |
-| US01 | Como aluno, eu quero poder acessar as notas, para ter um retorno que auxilie na melhora do meu desempenho | 1. Ao acessar o aplivcativo o aluno deve visualizar a opção de ver suas notas
-2. Ao selecionar para visualizar notas, as notas devem aparecer separadas por matéria | Média | RF01 |
-| US02 | Como aluno, eu quero acessar minha frequência nas aulas da discipina, para manter um controle de faltas | 1. Ao acessar o aplivcativo o aluno deve visualizar a opção de ver sua frequência
-2. Ao selecionar para visualizar frequências, cada matéria deve apresentar suas frequências de forma separada  | Média | RF02, RF08 |
+| US01 | Como aluno, eu quero poder acessar as notas, para ter um retorno que auxilie na melhora do meu desempenho | 1. Ao acessar o aplivcativo o aluno deve visualizar a opção de ver suas notas 2. Ao selecionar para visualizar notas, as notas devem aparecer separadas por matéria | Média | RF01 |
+| US02 | Como aluno, eu quero acessar minha frequência nas aulas da discipina, para manter um controle de faltas | 1. Ao acessar o aplivcativo o aluno deve visualizar a opção de ver sua frequência 2. Ao selecionar para visualizar frequências, cada matéria deve apresentar suas frequências de forma separada  | Média | RF02, RF08 |
 | US03 | Como aluno, eu quero acessar os materiais das disciplinas, para revisar o conteúdo da disciplina. | 1. ?? 2. ?? 3?? | Alta | RF03 |
 | US04 | Como aluno, quero visualizar todos os participantes da minha disciplina, para poder interagir com os outro(s) aluno(s) e também professor(es). | 1. 2. 3. | Media | RF04, RF05, RF10 |
 | US05 | Como aluno, eu quero entrar em contato com o Professor, para tirar possíveis dúvidas da disciplina. | 1. ?? 2. ?? 3?? | Baixa | RF05, RF11 |
