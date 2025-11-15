@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <section id="disciplinas" role="disciplinas">
+        <h2>Disciplinas Matriculadas</h2>
+    </section>
+
+    <script>
+        const usuarioRa = JSON.parse(localStorage.getItem("login")).usuarioRa;
+        const disciplinas = JSON.parse(localStorage.getItem("disciplinas"));
+
+        
+        const disciplinasSection = document.getElementById("disciplinas");
+        disciplinas.filter(disciplina => 
+            disciplina.alunos.some(aluno => aluno.ra === usuarioRa)
+        ).forEach(disciplina => {
+            const button = document.createElement("button");
+            button.textContent = `ID: ${disciplina.id}, Nome: ${disciplina.nome}`;
+            button.className = "disciplina-button";
+            button.onclick = () => {
+                window.location.href = `./disciplina.html?id=${disciplina.id}`;
+            };
+            disciplinasSection.appendChild(button);
+        });
+        
+    </script>
+</body>
+</html>

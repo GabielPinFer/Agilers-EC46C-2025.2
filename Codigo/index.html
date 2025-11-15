@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toodle</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
     <main>
@@ -20,6 +21,8 @@
         <section id="materiais" role="materiais">
             <h2>Materiais existentes</h2>
         </section>
+
+        <a href="./inicioAluno.html">Ir para tela de aluno</a>
     </main>
 
     <script src="load.js" type="module"></script>
@@ -57,7 +60,7 @@
             const a = document.createElement("a");
             p.textContent = `ID: ${material.id}`;
             a.textContent = material.titulo;
-            a.href = material.link;
+            a.href = material.url;
             materiaisSection.appendChild(p);
             materiaisSection.appendChild(a);
         });
