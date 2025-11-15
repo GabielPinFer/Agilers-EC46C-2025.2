@@ -1,0 +1,134 @@
+[
+  {
+    "id": "EC46C",
+    "nome": "Desenvolvimento Ágil",
+    "professor": { "ra": "P002" },
+    "alunos": [
+      { "ra": "A001" },
+      { "ra": "A002" },
+      { "ra": "A003" },
+      { "ra": "A004" }
+    ],
+    "materiais": [
+      { "id": "M001" }
+    ],
+    "notas": [
+      {
+        "alunoId": "A001",
+        "avaliacoes": [
+          { "nota": 8.5 },
+          { "nota": 7.0 }
+        ]
+      },
+      {
+        "alunoId": "A002",
+        "avaliacoes": [
+          { "nota": 8.2 },
+          { "nota": 10.0 }
+        ]
+      },
+      {
+        "alunoId": "A004",
+        "avaliacoes": [
+          { "nota": 9.5 },
+          { "nota": 10.0 }
+        ]
+      }
+    ],
+    "frequencias": [
+      {
+        "alunoId": "A001",
+        "presencas": [
+          { "data": "2025-03-01", "presente": true },
+          { "data": "2025-03-02", "presente": false }
+        ]
+      },
+      {
+        "alunoId": "A002",
+        "presencas": [
+          { "data": "2025-03-01", "presente": false },
+          { "data": "2025-03-02", "presente": false }
+        ]
+      },
+      {
+        "alunoId": "A003",
+        "presencas": [
+          { "data": "2025-03-01", "presente": true },
+          { "data": "2025-03-02", "presente": true }
+        ]
+      },
+      {
+        "alunoId": "A004",
+        "presencas": [
+          { "data": "2025-03-01", "presente": true },
+          { "data": "2025-03-02", "presente": false }
+        ]
+      }
+    ],
+    "mensagens": [
+      {
+        "remetenteId": "A002",
+        "destinatarioId": "P002",
+        "conteudo": "Professor, tenho dúvida sobre a atividade.",
+        "data": "2025-03-15 14:22"
+      }
+    ]
+  },
+
+
+
+
+  {
+    "id": "EC46F",
+    "nome": "Transmissao de dados",
+    "professor": { "ra": "P004" },
+    "alunos": [
+      { "ra": "A001" },
+      { "ra": "A003" }
+    ],
+    "materiais": [
+      { "id": "M002" }
+    ],
+    "notas": [
+      {
+        "alunoId": "A001",
+        "avaliacoes": [
+          { "nota": 10 },
+          { "nota": 7.0 }
+        ]
+      },
+      {
+        "alunoId": "A003",
+        "avaliacoes": [
+          { "nota": 8.2 },
+          { "nota": 10.0 }
+        ]
+      }
+    ],
+    "frequencias": [
+      {
+        "alunoId": "A001",
+        "presencas": [
+          { "data": "2025-03-01", "presente": true },
+          { "data": "2025-03-02", "presente": false }
+        ]
+      },
+      {
+        "alunoId": "A003",
+        "presencas": [
+          { "data": "2025-03-01", "presente": true },
+          { "data": "2025-03-02", "presente": true }
+        ]
+      }
+    ],
+    "mensagens": [
+      {
+        "remetenteId": "A003",
+        "destinatarioId": "P004",
+        "conteudo": "Professor, tenho dúvida sobre a atividade.",
+        "data": "2025-03-15 14:22"
+      }
+    ]
+  }
+
+]

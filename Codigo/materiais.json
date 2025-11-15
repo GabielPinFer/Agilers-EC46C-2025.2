@@ -1,0 +1,14 @@
+[
+    {
+        "id": "M001",
+        "titulo": "Aula 10 - DevOps",
+        "url": "materiais/logica.pdf",
+        "dataEnvio": "20-10-2025"
+    },
+    {
+        "id": "M002",
+        "titulo": "Lista 10 - Banda passante.pdf",
+        "url": "materiais/logica2.pdf",
+        "dataEnvio": "10-11-2025"
+    }
+]

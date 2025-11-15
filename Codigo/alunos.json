@@ -1,0 +1,26 @@
+[
+    {
+        "ra": "A001",
+        "nome": "Pedro Henrique da Costa Silva",
+        "email": "pedros.2023@alunos.utfpr.edu.br",
+        "senha": "111"
+    },
+    {
+        "ra": "A002",
+        "nome": "Mario",
+        "email": "mario@alunos.utfpr.edu.br",
+        "senha": "222"
+    },
+    {
+        "ra": "A003",
+        "nome": "Gabriel Pinheiro Ferrari",
+        "email": "gabriel@alunos.utfpr.edu.br",
+        "senha": "333"
+    },
+    {
+        "ra": "A004",
+        "nome": "Elian",
+        "email": "elian@alunos.utfpr.edu.br",
+        "senha": "444"
+    }
+]

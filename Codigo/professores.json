@@ -1,0 +1,38 @@
+[
+    {
+      "ra": "P001",
+      "nome": "Fulano de Tal",
+      "email": "fulano@universidade.edu",
+      "senha": "231"
+    },
+    {
+      "ra": "P002",
+      "nome": "Érica Silva",
+      "email": "erica@utfpr.edu.br",
+      "senha": "231"
+    },
+    {
+      "ra": "P003",
+      "nome": "Gisele Alves Santana",
+      "email": "giselealves@utfpr.edu.br",
+      "senha": "231"
+    },
+    {
+      "ra": "P004",
+      "nome": "Eduardo Hodgson",
+      "email": "eduardohodgson@utfpr.edu.br",
+      "senha": "231"
+    },
+    {
+      "ra": "P005",
+      "nome": "Érica Silva",
+      "email": "erica@utfpr.edu.br",
+      "senha": "231"
+    },
+    {
+      "ra": "P006",
+      "nome": "Maísa Alcantara Zakir",
+      "email": "maisa@utfpr.edu.br",
+      "senha": "231"
+    }
+]
