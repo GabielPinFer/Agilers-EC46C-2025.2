@@ -129,6 +129,61 @@
         "data": "2025-03-15 14:22"
       }
     ]
+  },
+
+
+  
+    {
+    "id": "EC46HO",
+    "nome": "CALEM II",
+    "professor": { "ra": "P005" },
+    "alunos": [
+      { "ra": "A001" },
+      { "ra": "A004" }
+    ],
+    "materiais": [
+      { "id": "M003" }
+    ],
+    "notas": [
+      {
+        "alunoId": "A001",
+        "avaliacoes": [
+          { "nota": 10 },
+          { "nota": 7.0 }
+        ]
+      },
+      {
+        "alunoId": "A003",
+        "avaliacoes": [
+          { "nota": 8.2 },
+          { "nota": 10.0 }
+        ]
+      }
+    ],
+    "frequencias": [
+      {
+        "alunoId": "A001",
+        "presencas": [
+          { "data": "2025-03-01", "presente": true },
+          { "data": "2025-03-02", "presente": false }
+        ]
+      },
+      {
+        "alunoId": "A003",
+        "presencas": [
+          { "data": "2025-03-01", "presente": true },
+          { "data": "2025-03-02", "presente": true }
+        ]
+      }
+    ],
+    "mensagens": [
+      {
+        "remetenteId": "A003",
+        "destinatarioId": "P004",
+        "conteudo": "Professor, tenho dúvida sobre a atividade.",
+        "data": "2025-03-15 14:22"
+      }
+    ]
   }
 
 ]

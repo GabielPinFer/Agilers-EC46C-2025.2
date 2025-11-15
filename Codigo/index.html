@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toodle</title>
+</head>
+<body>
+    <main>
+        <h1>Grupo Agilers - Toodle</h1>
+        <section id="disciplinas" role="disciplinas">
+            <h2>Disciplinas existentes</h2>
+        </section>
+        <section id="alunos" role="alunos">
+            <h2>Alunos existentes</h2>
+        </section>
+        <section id="professores" role="professores">
+            <h2>Professores existentes</h2>
+        </section>
+        <section id="materiais" role="materiais">
+            <h2>Materiais existentes</h2>
+        </section>
+    </main>
+
+    <script src="load.js" type="module"></script>
+    <script>
+        const disciplinas = JSON.parse(localStorage.getItem("disciplinas"));
+        const alunos = JSON.parse(localStorage.getItem("alunos"));
+        const professores = JSON.parse(localStorage.getItem("professores"));
+        const materiais = JSON.parse(localStorage.getItem("materiais"));
+
+        const disciplinasSection = document.getElementById("disciplinas");
+        const alunosSection = document.getElementById("alunos");
+        const professoresSection = document.getElementById("professores");
+        const materiaisSection = document.getElementById("materiais");
+
+        disciplinas.forEach(disciplina => {
+            const p = document.createElement("p");
+            p.textContent = `ID: ${disciplina.id}, Nome: ${disciplina.nome}`;
+            disciplinasSection.appendChild(p);
+        });
+
+        alunos.forEach(aluno => {
+            const p = document.createElement("p");
+            p.textContent = `RA: ${aluno.ra}, Nome: ${aluno.nome}`;
+            alunosSection.appendChild(p);
+        });
+
+        professores.forEach(professor => {
+            const p = document.createElement("p");
+            p.textContent = `RA: ${professor.ra}, Nome: ${professor.nome}`;
+            professoresSection.appendChild(p);
+        });
+
+        materiais.forEach(material => {
+            const p = document.createElement("p");
+            const a = document.createElement("a");
+            p.textContent = `ID: ${material.id}`;
+            a.textContent = material.titulo;
+            a.href = material.link;
+            materiaisSection.appendChild(p);
+            materiaisSection.appendChild(a);
+        });
+    </script>
+</body>
+</html>
