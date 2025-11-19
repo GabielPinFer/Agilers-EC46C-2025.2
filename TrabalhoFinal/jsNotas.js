@@ -13,7 +13,9 @@ function acharAluno(){
     const parametroUrl = new URLSearchParams(window.location.search);
     const urlRa = parametroUrl.get('ra');
     const alunos = JSON.parse(localStorage.getItem("alunos"));
-    const alunoEncontrado = alunos.find(aluno => aluno.ra === urlRa);
+    const professores = JSON.parse(localStorage.getItem("professores"));
+    const alunoEncontrado = alunos.find(aluno => aluno.ra === urlRa) || professores.find(p => p.ra === urlRa);
+    
     if(!alunoEncontrado){
         return null;
     }

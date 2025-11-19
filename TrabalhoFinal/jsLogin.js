@@ -4,7 +4,10 @@ function addUsuario(ra, senha){
 }
 
 function verificaUsuario(ra,senha){
+    const chk = document.getElementById('chkProfessor');
     var bancoDados = JSON.parse(localStorage.getItem('alunos'));
+    if(chk.checked) bancoDados = JSON.parse(localStorage.getItem('professores'));
+
     var usuario = bancoDados.find(userExistente => userExistente.ra === ra && userExistente.senha === senha);
 
     if(usuario){

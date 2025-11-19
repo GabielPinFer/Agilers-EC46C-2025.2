@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="text-align: center;">
+    <header class="header">
+        <section id="disciplina" role="disciplina">
+            <br>
+            <h1 id="disciplinaEscolhida"></h1>
+            <br>
+        </section>
+    </header>
+
+    <main>
+
+        <h2>Contato e Mensagens</h2>
+        <ul id="listaMensagens"></ul>
+
+
+        <form onsubmit="enviar(event)">
+            Enviar duvida para o professor
+            <textarea id="duvidaMsg"></textarea>
+            <button>Enviar duvida</button>
+        </form>
+
+        <a href="PgAluno.html">
+            <button class="voltar-button">
+                VOLTAR
+            </button>   
+        </a> 
+    </main>
+
+    
+    <footer style="text-align: center;">
+        <img src="utfprImagem.png" width="300" height="250">
+    </footer>
+    
+    <script>
+        const listaMensagens = document.getElementById("listaMensagens");
+        
+        const getDisciplina = () => {
+            const params = new URLSearchParams(window.location.search);
+            const idDisciplina = params.get('id');
+            const disciplinas = JSON.parse(localStorage.getItem("disciplinas"));
+            const disciplina = disciplinas.find(disciplina => disciplina.id === idDisciplina);
+            return disciplina || {};
+        }
+
+        const getProfessor = () => {
+            const professores = JSON.parse(localStorage.getItem("professores"));
+            const disciplina = getDisciplina();
+            const {ra, nome, email} = professores.find(el => el.ra == disciplina.professor.ra);
+            return {ra, nome, email};
+        }
+
+        const getAlunos = () => {
+            const disciplina = getDisciplina();
+            const alunos = JSON.parse(localStorage.getItem("alunos"));
+            return alunos.filter(aluno => disciplina.alunos.some(al => al.ra == aluno.ra)).map(({ra,nome, email}) => ({ra,nome,email}));
+        }
+
+        const getParticipantes = () => {    
+            return [getProfessor(), ...getAlunos()];
+        }
+
+        const loadMsgs = () => {
+            listaMensagens.innerHTML = "";
+            const disciplina = getDisciplina();
+            disciplina.mensagens?.forEach(msg => {
+                const item = document.createElement("li");
+                const alunos = JSON.parse(localStorage.getItem("alunos"));
+                const professores = JSON.parse(localStorage.getItem("professores"));
+                let remetente = alunos.find(p => {
+                    console.log("caçando:",p.ra,msg.remetenteId);
+                    return p.ra == msg.remetenteId
+                });
+                remetente = remetente || professores.find(p => p.ra == msg.remetenteId);
+                let destinatario = alunos.find(p => p.ra == msg.destinatarioId);
+                destinatario = destinatario || professores.find(p => p.ra == msg.destinatarioId);
+                item.innerHTML = `
+                <p>Mensagem:"${msg.conteudo}"</p>
+                <p>De: ${remetente.nome} - ${remetente.email}</p>
+                <p>Para: ${destinatario.nome} - ${destinatario.email}</p>
+                <p>Data: ${msg.data}</p>
+                `
+                listaMensagens.appendChild(item)
+            })
+        }
+        loadMsgs();
+
+        const enviar = (e) => {
+            e.preventDefault();
+            const disciplina = getDisciplina();
+            const msg = document.getElementById("duvidaMsg").value;
+            const params = new URLSearchParams(window.location.search);
+            const novaMsg = {
+                remetenteId:params.get("ra"),
+                destinatarioId:disciplina.professor.ra,
+                conteudo:msg,
+                data:(new Date()).toDateString()
+            }
+            disciplina.mensagens.push(novaMsg);
+
+            let disciplinas = JSON.parse(localStorage.getItem("disciplinas"));
+            let i = disciplinas.findIndex(d => d.id == disciplina.id);
+            disciplinas[i] = disciplina;
+            localStorage.setItem("disciplinas", JSON.stringify(disciplinas));
+            alert("mensagem enviada!")
+            loadMsgs()
+        }
+
+    </script>
+</body>
+</html>

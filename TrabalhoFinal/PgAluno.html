@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disciplinas do Aluno</title>
     <link rel="stylesheet" href="index.css">
-    <script src="load.js" type="module"></script> </head>
 
 <body style="text-align: center;">
     <header>
@@ -30,13 +29,21 @@
                 if (disciplinas && usuarioRa) {
                     disciplinas.filter(disciplina => 
                         disciplina.alunos.some(aluno => aluno.ra === usuarioRa)
+                        || disciplina.professor.ra === usuarioRa
                     ).forEach(disciplina => {
                         const button = document.createElement("button");
                         button.textContent = `Id: ${disciplina.id} - Nome: ${disciplina.nome}`;
                         button.className = "disciplina-button";
                         
                         button.onclick = () => {
-                            window.location.href = `./PgDisciplina.html?id=${disciplina.id}&ra=${usuarioRa}`;
+                            const alunos = JSON.parse(localStorage.getItem("alunos"))
+                            
+                            if(alunos.some(el => el.ra == usuarioRa)){
+                                window.location.href = `./PgDisciplina.html?id=${disciplina.id}&ra=${usuarioRa}`;
+                            }
+                            else{
+                                window.location.href = `./PgDisciplinaProfessor.html?id=${disciplina.id}&ra=${usuarioRa}`;
+                            }
                         };
                         disciplinasSection.appendChild(button);
                     });

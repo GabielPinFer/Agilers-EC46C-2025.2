@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<script src="jsLogin.js" type="module"></script>
+
+<body style="text-align: center;">
+    <header class="header">
+        <section id="disciplina" role="disciplina">
+            <br>
+            <h1 id="disciplinaEscolhida"></h1>
+            <br>
+        </section>
+    </header>
+
+    <main>
+        <section>
+            <button id="btFrequencia" class="disciplina-button">Frequência</button>
+            <br><br>
+            <button id="btNotas" class="disciplina-button">Notas</button>
+            <br><br>
+            <button id="btParticipantes" class="disciplina-button">Participantes</button>
+            <br><br>
+            <button id="btMateriais" class="disciplina-button">Materiais</button>
+            <br><br>
+            <button id="btMensagens" class="disciplina-button">Mensagens e Contato</button>
+            <br>
+        </section>
+        <section>
+            <form onsubmit="lancarNota(event)">
+                Lançar nota do aluno
+                <label>RA do aluno
+                    <input type="text" id="raNota" placeholder="ex:A001"/>
+                </label>
+                <label>nota
+                    <input type="text" id="nota"/>
+                </label>
+                <button>Lançar</button>
+            </form>
+
+            <form onsubmit="lancarFrequencia(event)">
+                Lançar frequencia do aluno
+                <label>RA do aluno
+                    <input type="text" id="raFrequencia" placeholder="ex:A001"/>
+                </label>
+                <label>frequencia
+                    <input type="text" id="frequencia"/>
+                </label>
+                <button>Lançar</button>
+            </form>
+            
+            <form onsubmit="lancarMaterial(event)">
+                Lançar Material da disciplina
+                <label>Título do material
+                    <input type="text" id="tituloMaterial" placeholder="ex:A001"/>
+                </label>
+                <label>URL
+                    <input type="text" id="urlMaterial"/>
+                </label>
+                <button>Lançar</button>
+            </form>
+
+            <form onsubmit="alterarMaterial(event)">
+                Alterar Material da disciplina
+                <label>Id do material
+                    <input type="text" id="idMaterial" placeholder="ex:A001"/>
+                </label>
+                <label>Título do material
+                    <input type="text" id="tituloMaterial2" placeholder="ex:A001"/>
+                </label>
+                <label>URL
+                    <input type="text" id="urlMaterial2"/>
+                </label>
+                <button>Lançar</button>
+            </form>
+        </section>
+        <section>
+            <a href="PgAluno.html">
+                <button class="voltar-button">
+                    VOLTAR
+                </button>   
+            </a> 
+        </section>
+    </main>
+
+    <section>
+        <script src="jsDisciplina.js" type="module"></script>
+    </section>
+
+    <footer style="text-align: center;">
+        <img src="utfprImagem.png" width="300" height="250">
+    </footer>
+
+    <script>
+
+// PEGAR ID DA DISCIPLINA PELA URL
+function getDisciplinaIdDaUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id"); 
+}
+
+// Buscar lista completa do localStorage
+function getDisciplinas() {
+    return JSON.parse(localStorage.getItem("disciplinas")) || [];
+}
+
+function saveDisciplinas(arr) {
+    localStorage.setItem("disciplinas", JSON.stringify(arr));
+}
+
+// Retorna a disciplina certa (via id da URL)
+function getDisciplinaAtual() {
+    const id = getDisciplinaIdDaUrl();
+    const disciplinas = getDisciplinas();
+    return disciplinas.find(d => d.id === id);
+}
+
+// Salva a disciplina atual no localStorage
+function saveDisciplinaAtual(disciplinaAtual) {
+    const disciplinas = getDisciplinas();
+    const index = disciplinas.findIndex(d => d.id === disciplinaAtual.id);
+    if (index !== -1) {
+        disciplinas[index] = disciplinaAtual;
+        saveDisciplinas(disciplinas);
+    }
+}
+
+function getMateriais() {
+    return JSON.parse(localStorage.getItem("materiais")) || [];
+}
+
+function saveMateriais(arr) {
+    localStorage.setItem("materiais", JSON.stringify(arr));
+}
+
+function lancarNota(event) {
+    event.preventDefault();
+
+    const ra = document.getElementById("raNota").value.trim();
+    const nota = parseFloat(document.getElementById("nota").value.trim());
+
+    if (!ra || isNaN(nota)) {
+        alert("Informe RA e nota válidos.");
+        return;
+    }
+
+    const disciplina = getDisciplinaAtual();
+
+    let registro = disciplina.notas.find(n => n.alunoId === ra);
+
+    if (!registro) {
+        registro = { alunoId: ra, avaliacoes: [] };
+        disciplina.notas.push(registro);
+    }
+
+    registro.avaliacoes.push({ nota });
+
+    saveDisciplinaAtual(disciplina);
+
+    alert("Nota lançada com sucesso!");
+}
+
+
+function lancarFrequencia(event) {
+    event.preventDefault();
+
+    const ra = document.getElementById("raFrequencia").value.trim();
+    const freq = document.getElementById("frequencia").value.trim().toLowerCase();
+
+    if (!ra || (freq !== "p" && freq !== "f")) {
+        alert("Use 'p' para presente ou 'f' para falta.");
+        return;
+    }
+
+    const presente = freq === "p";
+    const data = new Date().toISOString().split("T")[0];
+
+    const disciplina = getDisciplinaAtual();
+
+    let registro = disciplina.frequencias.find(f => f.alunoId === ra);
+
+    if (!registro) {
+        registro = { alunoId: ra, presencas: [] };
+        disciplina.frequencias.push(registro);
+    }
+
+    registro.presencas.push({ data, presente });
+
+    saveDisciplinaAtual(disciplina);
+
+    alert("Frequência registrada!");
+}
+
+
+function lancarMaterial(event) {
+    event.preventDefault();
+
+    const titulo = document.getElementById("tituloMaterial").value.trim();
+    const url = document.getElementById("urlMaterial").value.trim();
+
+    if (!titulo || !url) {
+        alert("Preencha todos os campos.");
+        return;
+    }
+
+    const materiais = getMateriais();
+    const disciplina = getDisciplinaAtual();
+
+    // Gerar novo ID incremental
+    const novoId = "M" + String(materiais.length + 1).padStart(3, "0");
+
+    const novoMaterial = {
+        id: novoId,
+        titulo,
+        url,
+        dataEnvio: new Date().toLocaleDateString("pt-BR")
+    };
+
+    materiais.push(novoMaterial);
+    saveMateriais(materiais);
+
+    // Atrelar à disciplina
+    disciplina.materiais.push({ id: novoId });
+    saveDisciplinaAtual(disciplina);
+
+    alert("Material lançado com sucesso!");
+}
+
+
+function alterarMaterial(event) {
+    event.preventDefault();
+
+    const id = document.getElementById("idMaterial").value.trim();
+    const titulo = document.getElementById("tituloMaterial2").value.trim();
+    const url = document.getElementById("urlMaterial2").value.trim();
+
+    const materiais = getMateriais();
+    const material = materiais.find(m => m.id === id);
+
+    if (!material) {
+        alert("Material não encontrado.");
+        return;
+    }
+
+    if (titulo) material.titulo = titulo;
+    if (url) material.url = url;
+
+    saveMateriais(materiais);
+
+    alert("Material alterado!");
+}
+
+    </script>
+</body>
+</html>
