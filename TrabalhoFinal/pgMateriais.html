@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="text-align: center;">
+    <header class="header">
+        <section id="disciplina" role="disciplina">
+            <br>
+            <h1 id="disciplinaEscolhida"></h1>
+            <br>
+        </section>
+    </header>
+
+    <main>
+
+        <h2>Materiais</h2>
+        <ul id="listaMateriais"></ul>
+        <button id="btVoltar" class="voltar-button" onclick="voltarParaDisciplina()">
+            VOLTAR
+        </button> 
+    </main>
+
+    
+    <footer style="text-align: center;">
+        <img src="utfprImagem.png" width="300" height="250">
+    </footer>
+    
+    <script src="jsMateriais.js" type="module"></script>
+
+    <script>
+        function voltarParaDisciplina() {
+            const params = new URLSearchParams(window.location.search);
+            const idDisciplina = params.get('id');
+            const raUsuario = params.get('ra'); 
+            const isProfessor = params.get('isProfessor') === 'true';
+
+            let paginaDestino = isProfessor ? 'PgDisciplinaProfessor.html' : 'PgDisciplina.html';
+
+            window.location.href = `${paginaDestino}?id=${idDisciplina}&ra=${raUsuario}`;
+        }
+    </script>
+
+</body>
+</html>

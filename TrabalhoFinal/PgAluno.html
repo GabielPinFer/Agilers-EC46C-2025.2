@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disciplinas do Aluno</title>
+    <link rel="stylesheet" href="index.css">
+
+<body style="text-align: center;">
+    <header>
+        <section id="disciplinas" role="disciplinas">
+            <h1 class="header">Disciplinas Matriculadas</h1>
+            <br>
+        </section>
+    </header>
+
+    <main>
+        <section>
+            <script>
+                // 1. Correção no acesso: Acessa o 'ra' diretamente do objeto 'login'
+                const usuarioRa = JSON.parse(localStorage.getItem("login")).ra;
+                // 2. Acesso aos dados do localStorage
+                const disciplinas = JSON.parse(localStorage.getItem("disciplinas"));
+    
+                const disciplinasSection = document.getElementById("disciplinas");
+                
+                // 3. Correção na lógica de filtragem: 
+                //    - Filtra as disciplinas cujo array 'alunos' contém algum aluno com 'ra' igual ao 'usuarioRa'
+                if (disciplinas && usuarioRa) {
+                    disciplinas.filter(disciplina => 
+                        disciplina.alunos.some(aluno => aluno.ra === usuarioRa)
+                        || disciplina.professor.ra === usuarioRa
+                    ).forEach(disciplina => {
+                        const button = document.createElement("button");
+                        button.textContent = `Id: ${disciplina.id} - Nome: ${disciplina.nome}`;
+                        button.className = "disciplina-button";
+                        
+                        button.onclick = () => {
+                            const alunos = JSON.parse(localStorage.getItem("alunos"))
+                            
+                            if(alunos.some(el => el.ra == usuarioRa)){
+                                window.location.href = `./PgDisciplina.html?id=${disciplina.id}&ra=${usuarioRa}`;
+                            }
+                            else{
+                                window.location.href = `./PgDisciplinaProfessor.html?id=${disciplina.id}&ra=${usuarioRa}`;
+                            }
+                        };
+                        disciplinasSection.appendChild(button);
+                    });
+                } else {
+                    const p = document.createElement("p");
+                    p.textContent = "Nenhuma disciplina encontrada ou RA do usuário não definido.";
+                    disciplinasSection.appendChild(p);
+                }
+            </script>
+        </section>
+        
+        <section>
+            <br>
+            <a href="pgLogin.html">
+                <button class="voltar-button">
+                    VOLTAR
+                </button> 
+            </a>   
+        </section>
+    </main>
+
+    <footer style="text-align: center;">
+        <img src="utfprImagem.png" width="300" height="250">
+    </footer>
+
+</body>
+</html>

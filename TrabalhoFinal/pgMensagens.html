@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="text-align: center;">
+    <header class="header">
+        <section id="disciplina" role="disciplina">
+            <br>
+            <h1 id="disciplinaEscolhida"></h1>
+            <br>
+        </section>
+    </header>
+
+    <main>
+
+        <h2>Contato e Mensagens</h2>
+        <ul id="listaMensagens"></ul>
+
+        <section id="form">
+            
+        </section>
+
+        <button id="btVoltar" class="voltar-button" onclick="voltarParaDisciplina()">
+            VOLTAR
+        </button>
+    </main>
+
+    
+    <footer style="text-align: center;">
+        <img src="utfprImagem.png" width="300" height="250">
+    </footer>
+    
+    <script>
+        const listaMensagens = document.getElementById("listaMensagens");
+        
+        const getDisciplina = () => {
+            const params = new URLSearchParams(window.location.search);
+            const idDisciplina = params.get('id');
+            const disciplinas = JSON.parse(localStorage.getItem("disciplinas"));
+            const disciplina = disciplinas.find(disciplina => disciplina.id === idDisciplina);
+            return disciplina || {};
+        }
+
+        const getProfessor = () => {
+            const professores = JSON.parse(localStorage.getItem("professores"));
+            const disciplina = getDisciplina();
+            const {ra, nome, email} = professores.find(el => el.ra == disciplina.professor.ra);
+            return {ra, nome, email};
+        }
+
+        const getAlunos = () => {
+            const disciplina = getDisciplina();
+            const alunos = JSON.parse(localStorage.getItem("alunos"));
+            return alunos.filter(aluno => disciplina.alunos.some(al => al.ra == aluno.ra)).map(({ra,nome, email}) => ({ra,nome,email}));
+        }
+
+        const getParticipantes = () => {    
+            return [getProfessor(), ...getAlunos()];
+        }
+
+        const loadMsgs = () => {
+            listaMensagens.innerHTML = "";
+            const disciplina = getDisciplina();
+            disciplina.mensagens?.forEach(msg => {
+                const item = document.createElement("li");
+                const alunos = JSON.parse(localStorage.getItem("alunos"));
+                const professores = JSON.parse(localStorage.getItem("professores"));
+                let remetente = alunos.find(p => {
+                    return p.ra == msg.remetenteId
+                });
+                remetente = remetente || professores.find(p => p.ra == msg.remetenteId);
+                let destinatario = alunos.find(p => p.ra == msg.destinatarioId);
+                destinatario = destinatario || professores.find(p => p.ra == msg.destinatarioId);
+                item.innerHTML = `
+                <p>Mensagem:"${msg.conteudo}"</p>
+                <p>De: ${remetente.nome} - ${remetente.email}</p>
+                <p>Para: ${destinatario.nome} - ${destinatario.email}</p>
+                <p>Data: ${msg.data}</p>
+                `
+                listaMensagens.appendChild(item)
+            })
+        }
+        loadMsgs();
+
+        const professores = JSON.parse(localStorage.getItem("professores"));
+        const alunos = JSON.parse(localStorage.getItem("alunos"));
+
+        const params = new URLSearchParams(window.location.search);
+        const ra = params.get('ra');
+        let eAluno = true;
+        console.log("ola");
+        if(alunos.some(al => al.ra == ra)){
+            eAluno = true;
+            document.getElementById('form').innerHTML = `
+                <form onsubmit="enviar(event)">
+                    Enviar duvida para o professor
+                    <textarea id="duvidaMsg"></textarea>
+                    <button>Enviar duvida</button>
+                </form>
+            `
+        } else {
+            eAluno = false;
+            document.getElementById('form').innerHTML = `
+                <form onsubmit="enviar(event)">
+                    Enviar duvida para o professor
+                    <textarea id="duvidaMsg"></textarea>
+                    <label> RA do aluno destinatário
+                        <input type="text"id="destinatarioId"/>
+                    </label>
+                    <button>Enviar duvida</button>
+                </form>
+            `
+        }
+
+        
+
+        const enviar = (e) => {
+            const destinatarioIdValue = document.getElementById("destinatarioId").value;
+            const novaMsg = {
+                remetenteId:params.get("ra"),
+                destinatarioId:eAluno ? disciplina.professor.ra : destinatarioIdValue,
+                conteudo:msg,
+                data:(new Date()).toDateString()
+            }
+            disciplina.mensagens.push(novaMsg);
+
+            let disciplinas = JSON.parse(localStorage.getItem("disciplinas"));
+            let i = disciplinas.findIndex(d => d.id == disciplina.id);
+            disciplinas[i] = disciplina;
+            localStorage.setItem("disciplinas", JSON.stringify(disciplinas));
+            alert("mensagem enviada!")
+            loadMsgs()
+        }
+
+    </script>
+
+    <script>
+        function voltarParaDisciplina() {
+            const params = new URLSearchParams(window.location.search);
+            const idDisciplina = params.get('id');
+            const raUsuario = params.get('ra'); 
+            const isProfessor = params.get('isProfessor') === 'true';
+
+            let paginaDestino = isProfessor ? 'PgDisciplinaProfessor.html' : 'PgDisciplina.html';
+
+            window.location.href = `${paginaDestino}?id=${idDisciplina}&ra=${raUsuario}`;
+        }
+    </script>
+
+</body>
+</html>
