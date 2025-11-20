@@ -21,12 +21,9 @@
         <h2>Contato e Mensagens</h2>
         <ul id="listaMensagens"></ul>
 
-
-        <form onsubmit="enviar(event)">
-            Enviar duvida para o professor
-            <textarea id="duvidaMsg"></textarea>
-            <button>Enviar duvida</button>
-        </form>
+        <section id="form">
+            
+        </section>
 
         <button id="btVoltar" class="voltar-button" onclick="voltarParaDisciplina()">
             VOLTAR
@@ -74,7 +71,6 @@
                 const alunos = JSON.parse(localStorage.getItem("alunos"));
                 const professores = JSON.parse(localStorage.getItem("professores"));
                 let remetente = alunos.find(p => {
-                    console.log("caçando:",p.ra,msg.remetenteId);
                     return p.ra == msg.remetenteId
                 });
                 remetente = remetente || professores.find(p => p.ra == msg.remetenteId);
@@ -91,14 +87,43 @@
         }
         loadMsgs();
 
+        const professores = JSON.parse(localStorage.getItem("professores"));
+        const alunos = JSON.parse(localStorage.getItem("alunos"));
+
+        const params = new URLSearchParams(window.location.search);
+        const ra = params.get('ra');
+        let eAluno = true;
+        console.log("ola");
+        if(alunos.some(al => al.ra == ra)){
+            eAluno = true;
+            document.getElementById('form').innerHTML = `
+                <form onsubmit="enviar(event)">
+                    Enviar duvida para o professor
+                    <textarea id="duvidaMsg"></textarea>
+                    <button>Enviar duvida</button>
+                </form>
+            `
+        } else {
+            eAluno = false;
+            document.getElementById('form').innerHTML = `
+                <form onsubmit="enviar(event)">
+                    Enviar duvida para o professor
+                    <textarea id="duvidaMsg"></textarea>
+                    <label> RA do aluno destinatário
+                        <input type="text"id="destinatarioId"/>
+                    </label>
+                    <button>Enviar duvida</button>
+                </form>
+            `
+        }
+
+        
+
         const enviar = (e) => {
-            e.preventDefault();
-            const disciplina = getDisciplina();
-            const msg = document.getElementById("duvidaMsg").value;
-            const params = new URLSearchParams(window.location.search);
+            const destinatarioIdValue = document.getElementById("destinatarioId").value;
             const novaMsg = {
                 remetenteId:params.get("ra"),
-                destinatarioId:disciplina.professor.ra,
+                destinatarioId:eAluno ? disciplina.professor.ra : destinatarioIdValue,
                 conteudo:msg,
                 data:(new Date()).toDateString()
             }
