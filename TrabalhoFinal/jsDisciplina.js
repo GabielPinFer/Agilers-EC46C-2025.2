@@ -1,4 +1,3 @@
-
 function acharDisciplina(){
     const parametroUrl = new URLSearchParams(window.location.search);
     const urlId = parametroUrl.get('id');
@@ -16,24 +15,31 @@ function acharAluno(){
     return alunoEncontrado;
 }
 
+function isProfessor() {
+    const aluno = acharAluno();
+    return aluno && aluno.ra.startsWith('P'); 
+}
+
+const professorFlag = isProfessor();
+
 document.getElementById('disciplinaEscolhida').textContent = acharDisciplina().nome;
 
 document.getElementById('btFrequencia').onclick = () => {
-    window.location.href = `pgFrequencia.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}`;
+    window.location.href = `pgFrequencia.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}&isProfessor=${professorFlag}`;
 };
 
 document.getElementById('btNotas').onclick = () => {
-    window.location.href = `pgNotas.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}`;
+    window.location.href = `pgNotas.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}&isProfessor=${professorFlag}`;
 };
 
 document.getElementById('btParticipantes').onclick = () => {
-    window.location.href = `pgParticipantes.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}`;
+    window.location.href = `pgParticipantes.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}&isProfessor=${professorFlag}`;
 };
 
 document.getElementById('btMateriais').onclick = () => {
-    window.location.href = `pgMateriais.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}`;
+    window.location.href = `pgMateriais.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}&isProfessor=${professorFlag}`;
 };
 
 document.getElementById('btMensagens').onclick = () => {
-    window.location.href = `pgMensagens.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}`;
+    window.location.href = `pgMensagens.html?id=${acharDisciplina().id}&ra=${acharAluno().ra}&isProfessor=${professorFlag}`;
 };

@@ -28,11 +28,9 @@
             <button>Enviar duvida</button>
         </form>
 
-        <a href="PgDisciplina.html">
-            <button class="voltar-button">
-                VOLTAR
-            </button>   
-        </a> 
+        <button id="btVoltar" class="voltar-button" onclick="voltarParaDisciplina()">
+            VOLTAR
+        </button>
     </main>
 
     
@@ -115,5 +113,19 @@
         }
 
     </script>
+
+    <script>
+        function voltarParaDisciplina() {
+            const params = new URLSearchParams(window.location.search);
+            const idDisciplina = params.get('id');
+            const raUsuario = params.get('ra'); 
+            const isProfessor = params.get('isProfessor') === 'true';
+
+            let paginaDestino = isProfessor ? 'PgDisciplinaProfessor.html' : 'PgDisciplina.html';
+
+            window.location.href = `${paginaDestino}?id=${idDisciplina}&ra=${raUsuario}`;
+        }
+    </script>
+
 </body>
 </html>

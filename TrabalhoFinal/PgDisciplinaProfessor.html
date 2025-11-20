@@ -98,13 +98,11 @@
 
     <script>
 
-// PEGAR ID DA DISCIPLINA PELA URL
 function getDisciplinaIdDaUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get("id"); 
 }
 
-// Buscar lista completa do localStorage
 function getDisciplinas() {
     return JSON.parse(localStorage.getItem("disciplinas")) || [];
 }
@@ -113,14 +111,12 @@ function saveDisciplinas(arr) {
     localStorage.setItem("disciplinas", JSON.stringify(arr));
 }
 
-// Retorna a disciplina certa (via id da URL)
 function getDisciplinaAtual() {
     const id = getDisciplinaIdDaUrl();
     const disciplinas = getDisciplinas();
     return disciplinas.find(d => d.id === id);
 }
 
-// Salva a disciplina atual no localStorage
 function saveDisciplinaAtual(disciplinaAtual) {
     const disciplinas = getDisciplinas();
     const index = disciplinas.findIndex(d => d.id === disciplinaAtual.id);
@@ -211,7 +207,6 @@ function lancarMaterial(event) {
     const materiais = getMateriais();
     const disciplina = getDisciplinaAtual();
 
-    // Gerar novo ID incremental
     const novoId = "M" + String(materiais.length + 1).padStart(3, "0");
 
     const novoMaterial = {
@@ -224,7 +219,6 @@ function lancarMaterial(event) {
     materiais.push(novoMaterial);
     saveMateriais(materiais);
 
-    // Atrelar à disciplina
     disciplina.materiais.push({ id: novoId });
     saveDisciplinaAtual(disciplina);
 

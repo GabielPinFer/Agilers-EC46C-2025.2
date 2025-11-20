@@ -23,9 +23,9 @@
         <h2 class="main">NOTAS</h2>
         <h2>Suas <strong>Notas</strong> foram:</h2>
         <h2 id="notaEscolhida"></h2>
-            <button id="btVoltar" class="voltar-button">
-                VOLTAR
-            </button>
+        <button id="btVoltar" class="voltar-button" onclick="voltarParaDisciplina()">
+            VOLTAR
+        </button>
     </main>
 
     <section>
@@ -35,6 +35,19 @@
     <footer style="text-align: center;">
         <img src="utfprImagem.png" width="300" height="250">
     </footer>
+
+    <script>
+        function voltarParaDisciplina() {
+            const params = new URLSearchParams(window.location.search);
+            const idDisciplina = params.get('id');
+            const raUsuario = params.get('ra'); 
+            const isProfessor = params.get('isProfessor') === 'true';
+
+            let paginaDestino = isProfessor ? 'PgDisciplinaProfessor.html' : 'PgDisciplina.html';
+
+            window.location.href = `${paginaDestino}?id=${idDisciplina}&ra=${raUsuario}`;
+        }
+    </script>
 
 </body>
 </html>
